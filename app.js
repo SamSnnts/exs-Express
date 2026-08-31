@@ -19,7 +19,7 @@ function checagem (req, res, next){
     if(!nome) {
         console.log('sem nome')
     }
-    if(req.status === 403 ) {
+    if(res.status === 403 ) {
         res.send("Erro");
         return
     }
@@ -62,9 +62,6 @@ app.post('/usuarios', (req, res) => {
 
 })
 
-app.get('/usuarios', (req, res) => {
-  res.send(`Ola usuario ${req.query.nome}, voce ta na pagina ${req.query.pagina}`);
-});
 
 app.get('/sobre', (req, res) => {
     throw new Error('Deu algo errado')
