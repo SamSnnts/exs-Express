@@ -4,15 +4,38 @@ const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+function middlewareGlobal (req, res, next){
+    console.log(req.method, req.url);
+
+    next()
+}
+function middlewareHeader (req, res, next){
+    if(!req.headers.authorization) return res.status(401).send('Acesso negado')
+
+    next()
+}
+function checagem (req, res, next){
+    const nome = req.query.nome
+    if(!nome) {
+        console.log('sem nome')
+    }
+    if(req.status === 403 ) {
+        res.send("Erro");
+        return
+    }
+
+    next()
+}
+
+app.get('/', middlewareGlobal,(req, res) => {
   res.send('Olá, mundo!');
 });
 
-app.get('/contato', (req, res) => {
+app.get('/contato', middlewareHeader, (req, res) => {
   res.send('Obrigado por entrar em contato');
 });
 
-app.get('/usuarios/:id', (req, res) => {
+app.get('/usuarios/:id', middlewareGlobal, checagem, (req, res) => {
   res.send(`Ola usuario ${req.params.id}`);
 });
 
@@ -44,9 +67,17 @@ app.get('/usuarios', (req, res) => {
 });
 
 app.get('/sobre', (req, res) => {
-  res.send('Somos uma empresa');
+    throw new Error('Deu algo errado')
+    res.send('Somos uma empresa');
 });
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
+
+
+app.use((err, req, res, next) => {
+     console.error('Erro capturado:', err.message);
+     res.status(500).send('Algo quebrou no servidor');
+})
