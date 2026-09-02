@@ -5,7 +5,8 @@ const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
-app.set('view engine', 'ejs'); 
+app.set('view engine', 'ejs');
+app.use(express.static('public'))
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);

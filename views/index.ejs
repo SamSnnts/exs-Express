@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mó molezinha aqui tiu</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body style="background-color: gray;">
-    <p>seu nome é</p><span style="font-weight: 700;"><%= nome%></span>, seu email <%= email%>
+<body>
+    <p>seu nome é</p><span><%= nome%></span>, seu email <%= email%>
 
     <ul>
         <% for(let item of itens){%>
             <li><%= item %></li>
         <%}%>
     </ul>
+
+    <img src="/img/foto-para-destaque2.jpg" alt="" srcset="">
 
 </body>
 </html>
