@@ -17,10 +17,13 @@ exports.usuarioGetHome = (req, res) => {
 };
 
 exports.usuarioPost = (req, res) => {
-    const nome = req.body.nome;
-    const email = req.body.email;
+    
 
-    res.send(`Formulario enviado, nome: ${nome}, email: ${email}`);
+    res.render('index', {
+        nome : req.body.nome,
+        email : req.body.email,
+        itens: ['banana', 'maça', 'pera']
+    });
     console.log(req.body)
 
 }
