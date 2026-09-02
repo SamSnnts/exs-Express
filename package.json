@@ -16,6 +16,8 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "webpack": "^5.110.3",
+    "webpack-cli": "^7.2.3"
   }
 }
